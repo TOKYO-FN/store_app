@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField.CustomTextFormField({
+  CustomTextField({
     super.key,
     required this.label,
+    this.textInputType,
     this.onChanged,
     this.isPassword = false,
     this.prefixIcon,
@@ -14,14 +15,13 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   Icon? prefixIcon;
   IconButton? postFixIcon;
+  TextInputType? textInputType;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: isPassword,
-      validator: (data) {
-        if (data!.isEmpty) return 'this field is required';
-      },
+      keyboardType: textInputType,
       onChanged: onChanged,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,

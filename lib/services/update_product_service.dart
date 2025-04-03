@@ -5,6 +5,7 @@ class UpdateProductService {
   var dio = Dio();
 
   Future<ProductModel> updateProduct({
+    required String id,
     required String title,
     required String price,
     required String description,
@@ -19,9 +20,10 @@ class UpdateProductService {
       'category': category,
     };
     Response response = await dio.put(
-      'https://fakestoreapi.com/products',
+      'https://fakestoreapi.com/products/$id',
       queryParameters: queryParams,
     );
+    print(response);
 
     if (response.statusCode == 200) {
       return ProductModel.fromJson(response.data);

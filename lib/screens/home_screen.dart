@@ -40,8 +40,11 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder:
                     (context, index) => GestureDetector(
                       onTap:
-                          () =>
-                              Navigator.pushNamed(context, UpdateItemScreen.id),
+                          () => Navigator.pushNamed(
+                            context,
+                            UpdateItemScreen.id,
+                            arguments: snapshot.data![index],
+                          ),
                       child: Item(productModel: snapshot.data![index]),
                     ),
                 itemCount: snapshot.data!.length,
