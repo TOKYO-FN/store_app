@@ -1,34 +1,26 @@
 import 'package:dio/dio.dart';
-import 'package:store_app/models/product_model.dart';
+import 'package:store_app/helper/api.dart';
 
 class AddProductService {
   var dio = Dio();
 
-  Future<ProductModel> addProduct({
+  Future<Map<String, dynamic>> addProduct({
     required String title,
     required String price,
     required String description,
     required String image,
     required String category,
   }) async {
-    Map<String, dynamic> queryParams = {
+    Map<String, dynamic> data = {
       'title': title,
       'price': price,
       'description': description,
       'image': image,
       'category': category,
     };
-    Response response = await dio.post(
-      'https://fakestoreapi.com/products',
-      queryParameters: queryParams,
+    return await Api().post(
+      url: 'https://fakestoreapi.com/products',
+      body: data,
     );
-
-    if (response.statusCode == 200) {
-      return ProductModel.fromJson(response.data);
-    } else {
-      throw Exception(
-        'there is a problem with status code ${response.statusCode}',
-      );
-    }
   }
 }

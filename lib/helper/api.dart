@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class Api {
   Dio dio = Dio();
@@ -34,6 +33,7 @@ class Api {
     );
 
     if (response.statusCode == 200) {
+      print(response.data);
       return response.data;
     } else {
       throw Exception(
@@ -62,6 +62,7 @@ class Api {
     );
 
     if (response.statusCode == 200) {
+      print(response.data);
       return response.data;
     } else {
       throw Exception(

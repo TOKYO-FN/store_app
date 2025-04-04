@@ -85,6 +85,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
 
   void updateProduct(ProductModel productModel) {
     UpdateProductService().updateProduct(
+      id: productModel.id.toString(),
       title: productName == null ? productModel.title : productName!,
       price: price == null ? productModel.price.toString() : price!,
       description:
