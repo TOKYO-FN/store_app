@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:store_app/helper/api.dart';
 import 'package:store_app/models/product_model.dart';
 
 class AllProductsByCategory {
@@ -7,19 +8,13 @@ class AllProductsByCategory {
   Future<List<ProductModel>> GetAllProductList({
     required String categoryName,
   }) async {
-    Response response = await dio.get(
-      'https://fakestoreapi.com/products/category/$categoryName',
+    var jsonData = await Api().get(
+      url: 'https://fakestoreapi.com/products/category/$categoryName',
     );
-    if (response.statusCode == 200) {
-      var productList = <ProductModel>[];
-      for (var item in response.data) {
-        productList.add(ProductModel.fromJson(item));
-      }
-      return productList;
-    } else {
-      throw Exception(
-        'There is a problem with status code ${response.statusCode}',
-      );
+    var productList = <ProductModel>[];
+    for (var item in jsonData) {
+      productList.add(ProductModel.fromJson(item));
     }
+    return productList;
   }
 }

@@ -5,23 +5,25 @@ class UpdateProductService {
   var dio = Dio();
 
   Future<ProductModel> updateProduct({
-    required String id,
     required String title,
     required String price,
     required String description,
     required String image,
     required String category,
   }) async {
-    Map<String, dynamic> queryParams = {
+    Map<String, dynamic> data = {
       'title': title,
       'price': price,
       'description': description,
       'image': image,
       'category': category,
     };
-    Response response = await dio.put(
-      'https://fakestoreapi.com/products/$id',
-      queryParameters: queryParams,
+    Response response = await dio.post(
+      'https://fakestoreapi.com/products',
+      data: data,
+      options: Options(
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      ),
     );
     print(response);
 

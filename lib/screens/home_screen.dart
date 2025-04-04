@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:store_app/helper/api.dart';
 import 'package:store_app/screens/update_item_screen.dart';
 import 'package:store_app/services/get_all_products_service.dart';
 import 'package:store_app/widgets/item.dart';
@@ -53,6 +55,27 @@ class HomeScreen extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             }
           },
+        ),
+      ),
+      floatingActionButton: CircleAvatar(
+        backgroundColor: Colors.grey,
+        foregroundColor: Colors.white,
+        radius: 25,
+        child: IconButton(
+          onPressed: () async {
+            var we = await Api().post(
+              url: 'https://fakestoreapi.com/products/',
+              body: {
+                'title': 'test product',
+                'price': '13.5',
+                'description': 'lorem ipsum set',
+                'image': 'https://i.pravatar.cc',
+                'category': 'electronic',
+              },
+            );
+            print(we);
+          },
+          icon: Icon(Icons.post_add_rounded),
         ),
       ),
     );
